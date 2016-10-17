@@ -1,4 +1,7 @@
 {
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
   "rules": {
     //Logic errors
     "comma-dangle": "error",

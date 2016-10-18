@@ -1,10 +1,12 @@
 'use strict';
 let gulp = require('gulp');
 let babel = require('gulp-babel');
+let cleanCSS = require('gulp-clean-css');
 let concat = require('gulp-concat');
 let exec = require('child_process').exec;
 let eslint = require('gulp-eslint');
 let jshint = require('gulp-jshint');
+let purifycss = require('gulp-purifycss');
 let runSequence = require('run-sequence');
 let sass = require('gulp-sass');
 let sourcemaps = require('gulp-sourcemaps');
@@ -14,6 +16,7 @@ const basePaths = {
   styles: 'src/css/'
 };
 const paths = {
+  html: 'src/html/*.html',
   js: 'src/js/**/*.js',
   jsLibs: 'src/libs/*.js',
   scss: basePaths.styles + 'scss/**/*.scss',
@@ -21,7 +24,7 @@ const paths = {
 };
 
 gulp.task('styles', () => {
-  return gulp.src([basePaths.styles + 'bootstrap.min.css', paths.scss])
+  return gulp.src([basePaths.styles + 'bootstrap*.css', paths.scss])
     .pipe(sourcemaps.init())
     .pipe(
       sass({
@@ -30,6 +33,8 @@ gulp.task('styles', () => {
       }).on('error', sass.logError)
     )
     .pipe(concat('all.min.css'))
+    .pipe(purifycss([paths.js, paths.html]))
+    .pipe(cleanCSS())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/css'));
 });

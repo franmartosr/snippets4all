@@ -33,7 +33,7 @@ gulp.task('styles', () => {
       }).on('error', sass.logError)
     )
     .pipe(concat('all.min.css'))
-    .pipe(purifycss([paths.js, paths.html]))
+    .pipe(purifycss([paths.js, paths.html, 'index.html']))
     .pipe(cleanCSS())
     .pipe(sourcemaps.write('.'))
     .pipe(gulp.dest('./dist/css'));

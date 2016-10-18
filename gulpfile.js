@@ -20,7 +20,7 @@ const paths = {
   js: 'src/js/**/*.js',
   jsLibs: 'src/libs/*.js',
   scss: basePaths.styles + 'scss/**/*.scss',
-  server: 'src/server.js'
+  server: 'server.js'
 };
 
 gulp.task('styles', () => {

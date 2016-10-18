@@ -18,15 +18,12 @@ app.use(logger('dev'));
 app.use('/css', express.static('dist/css'));
 app.use('/img', express.static('src/img'));
 app.use('/js', express.static('dist/js'));
-app.use('/tmpl', express.static(__dirname + '/html'));
-app.set('views', __dirname + '/html');
-app.engine('html', require('ejs').__express);
-app.set('view engine', 'html');
+app.use('/tmpl', express.static('src/html'));
 
 //Routes
 app.get('/language/:lang', (req, res) => res.send(getSingleLangSnippets(req.params.lang + '.json')));
 app.get('/langs', (req, res) => res.send(fs.readdirSync('snippets').map(getSingleLangSnippets)));
-app.get('/', (req, res) => res.render('main'));
+app.get('/', (req, res) => res.sendFile('index.html', { root: __dirname }));
 
 //Page not found error
 app.get('*', (req, res) => res.status(CONSTANTS.NOT_FOUND_CODE).send(req.url + ' not found!!!'));

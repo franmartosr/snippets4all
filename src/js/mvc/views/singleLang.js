@@ -2,13 +2,12 @@ define([
   'backbone',
   '/js/mvc/models/lang.js',
   'text!/tmpl/singleLang.html'
-], function (Backbone, model, tmpl) {
+], function (Backbone, Model, tmpl) {
   'use strict';
 
   return Backbone.View.extend({
     el: '#mainContent',
-    events: {},
-    model: new model(),
+    model: new Model(),
     template: _.template(tmpl),
     initialize: function(params) {
       this.model.url = `language/${params.language}`;
@@ -19,7 +18,7 @@ define([
       });
     },
     render: function() {
-      this.$el.html(_.template(this.template({ data: this.model.attributes })));
+      this.$el.html(this.template({ data: this.model.attributes }));
     }
   });
 });

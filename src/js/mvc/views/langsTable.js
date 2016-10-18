@@ -2,13 +2,12 @@ define([
   'backbone',
   '/js/mvc/collections/langs.js',
   'text!/tmpl/langsTable.html'
-], function (Backbone, collection, tmpl) {
+], function (Backbone, Collection, tmpl) {
   'use strict';
 
   return Backbone.View.extend({
-    collection: new collection(),
+    collection: new Collection(),
     el: '#mainContent',
-    events: {},
     template: _.template(tmpl),
     initialize: function() {
       this.collection.fetch({
@@ -19,7 +18,7 @@ define([
       });
     },
     render: function() {
-      this.$el.html(_.template(this.template({ data: this.model })));
+      this.$el.html(this.template({ data: this.model }));
     }
   });
 });

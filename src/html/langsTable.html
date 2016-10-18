@@ -1,0 +1,25 @@
+<table class='table table-bordered table-striped table-condensed table-responsive' id='langsTable'>
+  <caption class="text-center">Languages list</caption>
+  <thead>
+    <tr>
+      <td><strong>Languages</strong></td>
+      <td><strong>Official Page</strong></td>
+      <td><strong>Description</strong></td>
+      <td><strong>Snippets</strong></td>
+    </tr>
+  </thead>
+  <tbody>
+    <% data.forEach(function(lang) { %>
+      <tr>
+        <td><a href='#language/<%= lang.attributes.link %>'>
+          <%= lang.attributes.title %>
+        </a></td>
+        <td><a href='<%= lang.attributes.officialPage %>' target="_blank">
+          <%= lang.attributes.officialPage %>
+        </a></td>
+        <td><%= lang.attributes.description %></td>
+        <td><%= lang.attributes.snippets.length %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

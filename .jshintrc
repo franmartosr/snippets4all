@@ -1,0 +1,11 @@
+{
+  "-W104": false,
+  "-W119": false,
+  "-W117": false,
+  "curly": true,
+  "eqeqeq": true,
+  "esversion": 6,
+  "strict": "function",
+  "unused": true,
+  "varstmt": true
+}

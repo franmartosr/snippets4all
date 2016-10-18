@@ -1,5 +1,6 @@
 'use strict';
 
+//Plugins
 const CONSTANTS = {
   APP_PORT: 3001,
   NOT_FOUND_CODE: 404
@@ -9,40 +10,28 @@ const fs = require('fs');
 const app = express();
 const logger = require('morgan');
 
-app.use(logger('dev'));
+//Utils
+let getSingleLangSnippets = (file) => JSON.parse(fs.readFileSync('snippets/' + file));
 
+//Static files
+app.use(logger('dev'));
 app.use('/css', express.static('dist/css'));
 app.use('/img', express.static('src/img'));
 app.use('/js', express.static('dist/js'));
-app.use('/snippets', express.static('snippets'));
 app.use('/tmpl', express.static(__dirname + '/html'));
 app.set('views', __dirname + '/html');
 app.engine('html', require('ejs').__express);
 app.set('view engine', 'html');
 
-app.get('/language/:id', function(req, res) {
-  let fileName = 'snippets/' + req.url.replace('/language/', '') + '.json';
-  res.send(JSON.parse(fs.readFileSync(fileName)));
-});
+//Routes
+app.get('/language/:lang', (req, res) => res.send(getSingleLangSnippets(req.params.lang + '.json')));
+app.get('/langs', (req, res) => res.send(fs.readdirSync('snippets').map(getSingleLangSnippets)));
+app.get('/', (req, res) => res.render('main'));
 
-app.get('/langs', function(req, res) {
-  let list = fs.readdirSync('snippets').map(function(lang) {
-    return JSON.parse(fs.readFileSync('snippets/' + lang));
-  });
+//Page not found error
+app.get('*', (req, res) => res.status(CONSTANTS.NOT_FOUND_CODE).send(req.url + ' not found!!!'));
 
-  res.send(list);
-});
-
-app.get('/', function(req, res) {
-  if(req.url === '/') {
-    res.render('main');
-  } else {
-    res.status(CONSTANTS.NOT_FOUND_CODE).send(req.url + ' not found!!!');
-  }
-});
-
-app.listen(CONSTANTS.APP_PORT, function() {
-  console.log('App ready in port', CONSTANTS.APP_PORT);
-});
+//Launch server
+app.listen(CONSTANTS.APP_PORT, () => console.log('App ready in port', CONSTANTS.APP_PORT));
 
 module.exports = app;

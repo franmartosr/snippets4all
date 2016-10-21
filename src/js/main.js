@@ -1,6 +1,4 @@
-/* eslint-disable strict */
-'use strict'; // jshint ignore:line
-/* eslint-enable strict */
+'use strict';
 
 requirejs.config({
   baseUrl: 'src',

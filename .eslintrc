@@ -101,7 +101,7 @@
     "wrap-iife": ["error", "inside"],
     "yoda": "error",
     //Strict Mode
-    "strict": ["error", "function"],
+    "strict": ["error", "global"],
     //Variables
     "no-catch-shadow": "warn",
     "no-delete-var": "error",

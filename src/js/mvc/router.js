@@ -1,7 +1,7 @@
 /* eslint-disable no-new */
-define(['backbone'], function (Backbone) {
-  'use strict';
+'use strict';
 
+define(['backbone'], function (Backbone) {
   const Router = Backbone.Router.extend({
     routes: {
       '': 'main',

@@ -1,10 +1,10 @@
+'use strict';
+
 define([
   'backbone',
   '/js/mvc/models/lang.js',
   'text!/tmpl/singleLang.html'
-], function (Backbone, Model, tmpl) {
-  'use strict';
-
+], (Backbone, Model, tmpl) => {
   return Backbone.View.extend({
     el: '#mainContent',
     model: new Model(),

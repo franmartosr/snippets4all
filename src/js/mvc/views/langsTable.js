@@ -1,10 +1,10 @@
+'use strict';
+
 define([
   'backbone',
   '/js/mvc/collections/langs.js',
   'text!/tmpl/langsTable.html'
-], function (Backbone, Collection, tmpl) {
-  'use strict';
-
+], (Backbone, Collection, tmpl) => {
   return Backbone.View.extend({
     collection: new Collection(),
     el: '#mainContent',

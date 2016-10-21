@@ -75,7 +75,7 @@ gulp.task('watch', () => {
   };
 
   gulp.watch(paths.js, watchProps, () => runSequence('lintJS', 'scripts'));
-  gulp.watch(paths.scss, watchProps, 'styles');
+  gulp.watch(paths.scss, watchProps, ['styles']);
 });
 
 gulp.task('server', () => {
